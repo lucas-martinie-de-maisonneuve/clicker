@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Rotation Planet
     var rotation = 0;
 
-    rotatePlanet();
+    // rotatePlanet();
 
     clickButton.addEventListener('click', function () {
         if (countPerClick === 0)
@@ -26,12 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 20);
     });
 
-    // Rotation Planet
-    function rotatePlanet() {
-        rotation += 0.5;
-        clickButton.style.transform = 'translate(-50%, -50%) rotate(' + rotation + 'deg)';
-        window.requestAnimationFrame(rotatePlanet);
-    }
+
 
 });
 

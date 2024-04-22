@@ -97,11 +97,12 @@ main {
     transform: translate(-50%, -50%); 
 }
 
-/* ANIMATION */
+/***** ANIMATION *****/
 
 .article-back { 
     position: absolute;
     z-index: 1; 
+    width: 100;
 }
 
 .article-front {
@@ -111,13 +112,68 @@ main {
     width: 100%;
 }
 
+
+/* Main Planet */
+
 #div-animation {
     position: relative;
     width: 200px;
     height: 200px;
 }
 
-#planet2 {
-    width: 50px;
-    height: 50px;
+/* Background planets */
+
+.planet2, .planet3, .planet4, .planet5 {
+    position: absolute;
+    top: 80%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+}
+
+.planet2 {
+    margin-top: 50px;
+    width: 50px; 
+    height: auto;
+    animation: slideLeft 20s linear infinite; 
+}
+
+.planet3 {
+    margin-top: 550px;
+    width: 10px; 
+    height: auto;
+    animation: slideLeft 100s linear infinite; 
+}
+
+.planet4 {
+    margin-top: 655px;
+    width: 25px; 
+    height: auto;
+    animation: slideLeft 55s linear infinite; 
+}
+
+.planet5 {
+    margin-top: 450px;
+    width: 20px; 
+    height: auto;
+    animation: slideRight 100s linear infinite;
+}
+
+
+@keyframes slideLeft {
+    0% {
+        top: 100%; /* Début de l'animation, à droite de la fenêtre */
+    }
+    100% {
+        left: calc(90vw + 100px); /* Fin de l'animation, déplacé tout à gauche */
+    }
+}
+
+
+@keyframes slideRight {
+    100% {
+        left: -90%; 
+    }
+    0% {
+        left: calc(90vw + 100px); 
+    }
 }
