@@ -2,6 +2,7 @@
 let clickCount = 0;
 let countPerClick = 0;
 let totalGained = 0
+let buttonCosts = [10, 100, 1000];
 
 document.addEventListener("DOMContentLoaded", function () {
     const clickButton = document.getElementById('clicker');
@@ -16,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let planet_height = 0
 
     rotatePlanet();
-
+    updateButtons();
     function planete_size() {
         if (planet_height > 0) {
             setTimeout(function () {
@@ -56,18 +57,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-function buy(cost) {
+function buy(costIndex) {
+    let cost = buttonCosts[costIndex];
     let currentClickCount = parseInt(document.getElementById('clickCount').textContent);
     if (currentClickCount >= cost) {
         currentClickCount -= cost;
         clickCount = currentClickCount;
-        if (cost === 10)
-            countPerClick += 3
-        else if (cost === 100)
-            countPerClick += 10
-        else if (cost === 1000)
-            countPerClick += 50
+        if (cost === buttonCosts[0])
+            countPerClick += 3;
+        else if (cost === buttonCosts[1])
+            countPerClick += 10;
+        else if (cost === buttonCosts[2])
+            countPerClick += 50;
         document.getElementById('clickCount').textContent = currentClickCount;
         document.getElementById('perClick').textContent = "Gain de click : " + countPerClick;
+
+        buttonCosts[costIndex] *= 1.2;
+        buttonCosts[costIndex] = Math.floor(buttonCosts[costIndex]);
+
+        updateButtons();
+    }
+} function updateButtons() {
+    let facilitiesSection = document.getElementById('facilities');
+    let upgradeSection = document.getElementById('upgrade');
+    facilitiesSection.innerHTML = "";
+    upgradeSection.innerHTML = "";
+
+    for (let i = 0; i < buttonCosts.length; i++) {
+        let cost = buttonCosts[i];
+        let button = document.createElement('button');
+        button.className = 'button';
+        button.textContent = cost + " Clicks (Clicks + " + ((cost === buttonCosts[0]) ? 3 : (cost === buttonCosts[1]) ? 10 : 50) + ")";
+        button.onclick = function () {
+            buy(i);
+        };
+        facilitiesSection.appendChild(button);
+
     }
 }
