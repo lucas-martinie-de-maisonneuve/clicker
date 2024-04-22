@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/styles.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="src/script.js"></script>
+    <title>Clicker</title>
+</head>
+
+<body>
+    <main>
+
+        <section class="click">
+            <div>
+                <button id="clicker"></button>
+            </div>
+            <div class="rect-click">
+                <hr>
+                <p id="clickCount">0</p>
+                <p id="perClick">Gain de click : 1</p>
+                <hr>
+            </div>
+        </section>
+
+        <section class="facilities">
+            <button class="button" onclick="buy(10)">10 Clicks (Clicks + 3)</button>
+            <button class="button" onclick="buy(100)">100 Clicks (Clicks + 10)</button>
+            <button class="button" onclick="buy(1000)">1000 Clicks (Clicks + 50)</button>
+        </section>
+        <section class="upgrade">
+            <button class="button" onclick="buy(10)">10 Clicks (Clicks + 3)</button>
+            <button class="button" onclick="buy(100)">100 Clicks (Clicks + 10)</button>
+            <button class="button" onclick="buy(1000)">1000 Clicks (Clicks + 50)</button>
+        </section>
+    </main>
+</body>
+
+</html>
