@@ -9,11 +9,15 @@ document.addEventListener("DOMContentLoaded", function () {
     // Rotation Planet
     var rotation = 0;
 
+    // Planet size
+    let planet_width = 0
+    let planet_height = 0
+
     // rotatePlanet();
 
     clickButton.addEventListener('click', function () {
         if (countPerClick === 0)
-            clickCount++
+            clickCount++;
         else
             clickCount += countPerClick;
         clickCountDisplay.textContent = clickCount;
@@ -24,9 +28,15 @@ document.addEventListener("DOMContentLoaded", function () {
             clickButton.style.width = "250px";
             clickButton.style.height = "250px";
         }, 20);
+        
     });
 
-
+    // Rotation Planet
+    function rotatePlanet() {
+        rotation += 0.5;
+        clickButton.style.transform = 'translate(-50%, -50%) rotate(' + rotation + 'deg)';
+        window.requestAnimationFrame(rotatePlanet);
+    }
 
 });
 
@@ -44,5 +54,4 @@ function buy(cost) {
         document.getElementById('clickCount').textContent = currentClickCount;
         document.getElementById('perClick').textContent = "Gain de click : " + countPerClick;
     }
-
 }
