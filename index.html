@@ -8,12 +8,19 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="src/script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
     <title>Clicker</title>
 </head>
 
 <body>
-    <main>
+    <header>
+        <p id="title">Clicker</p>
+        <p id="shop">Shop</p>
 
+    </header>
+    <main>
         <section class="click">
             <div id="div-planet">
                 <div id="div-animation">
@@ -40,6 +47,7 @@
             <button class="button" onclick="buy(100)">100 Clicks (Clicks + 10)</button>
             <button class="button" onclick="buy(1000)">1000 Clicks (Clicks + 50)</button>
         </section>
+
     </main>
 </body>
 
