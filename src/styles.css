@@ -11,6 +11,7 @@ body {
     background-size: cover;
     background-position: center;
     background-image: url('/image/background.jpg');
+    background-size: cover;
 }
 
 main {
@@ -76,12 +77,21 @@ main {
 #clicker {
     width: 250px;
     height: 250px;
-    color: brown;
-    border-radius: 50%;
     cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    /* transition: transform 0.5s ease; / */
 }
 
 #clickCount {
     font-size: 50px;
     margin: 0
+}
+/* Vanny */
+#div-animation {
+    position: relative;
+    width: 200px;
+    height: 200px;
 }

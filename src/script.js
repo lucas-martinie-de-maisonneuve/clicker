@@ -1,9 +1,15 @@
+// Click on Planet
 let clickCount = 0;
 let countPerClick = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
     const clickButton = document.getElementById('clicker');
     const clickCountDisplay = document.getElementById('clickCount');
+
+    // Rotation Planet
+    var rotation = 0;
+
+    rotatePlanet();
 
     clickButton.addEventListener('click', function () {
         if (countPerClick === 0)
@@ -19,6 +25,14 @@ document.addEventListener("DOMContentLoaded", function () {
             clickButton.style.height = "250px";
         }, 20);
     });
+
+    // Rotation Planet
+    function rotatePlanet() {
+        rotation += 0.5;
+        clickButton.style.transform = 'translate(-50%, -50%) rotate(' + rotation + 'deg)';
+        window.requestAnimationFrame(rotatePlanet);
+    }
+
 });
 
 function buy(cost) {
@@ -35,5 +49,5 @@ function buy(cost) {
         document.getElementById('clickCount').textContent = currentClickCount;
         document.getElementById('perClick').textContent = "Gain de click : " + countPerClick;
     }
-}
 
+}
