@@ -24,7 +24,6 @@ main {
 .rect-click {
     width: 250px;
     height: 150px;
-
     background-color: grey;
     opacity: 0.4;
 
@@ -37,15 +36,14 @@ main {
     width: 20%;
     margin-left: 10px;
     opacity: 0.4;
-    
 }
 
 #clicker {
-    width: 200px;
-    height: 200px;
-    background-color: brown;
+    width: 250px;
+    height: 250px;
     color: brown;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 #clickCount {
