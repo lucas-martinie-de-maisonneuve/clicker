@@ -4,6 +4,7 @@ body {
     height: 100vh;
     margin: 0;
     background-image: url('/image/background.jpg');
+    background-size: cover;
 }
 
 main {
@@ -18,32 +19,32 @@ main {
     flex-direction: column;
     justify-content: center;
     width: 80%; 
-   
 }
 
 .rect-click {
     width: 250px;
     height: 150px;
-    background-color: grey;
-    opacity: 0.4;
+    background-color: rgba(128, 128, 128, 0.8);
 
 }
 .facilities, .upgrade {
-    background-color: blueviolet;
+    background-color: rgba(138, 43, 226, 0.4);
     padding: 1%;
     display: flex;
     flex-direction: column;
     width: 20%;
     margin-left: 10px;
-    opacity: 0.4;
 }
 
 #clicker {
     width: 250px;
     height: 250px;
-    color: brown;
-    border-radius: 50%;
     cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    transition: transform 0.5s ease; /
 }
 
 #clickCount {
@@ -55,4 +56,11 @@ main {
     margin-top: 10px;
     padding: 10px 20px;
     font-size: 16px;
+}
+
+/* Vanny */
+#div-animation {
+    position: relative;
+    width: 200px;
+    height: 200px;
 }
