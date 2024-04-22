@@ -7,10 +7,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     clickButton.addEventListener('click', function () {
         if (countPerClick === 0)
-            clickCount ++
+            clickCount++
         else
             clickCount += countPerClick;
         clickCountDisplay.textContent = clickCount;
+        clickButton.style.width = "235px";
+        clickButton.style.height = "235px";
+
+        setTimeout(function () {
+            clickButton.style.width = "250px";
+            clickButton.style.height = "250px";
+        }, 20);
     });
 });
 
@@ -27,5 +34,6 @@ function buy(cost) {
             countPerClick += 50
         document.getElementById('clickCount').textContent = currentClickCount;
         document.getElementById('perClick').textContent = "Gain de click : " + countPerClick;
-        }
+    }
 }
+
