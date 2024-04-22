@@ -20,8 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
             setTimeout(function () {
                 planet_height -= 1;
                 planet_width -= 1;
-                clickButton.style.width = (220 + planet_width) + "px";
-                clickButton.style.height = (220 + planet_height) + "px";
+                clickButton.style.width = (235 + planet_width) + "px";
+                clickButton.style.height = (235 + planet_height) + "px";
                 planete_size();
             }, 50)
         }
@@ -63,5 +63,4 @@ function buy(cost) {
         document.getElementById('clickCount').textContent = currentClickCount;
         document.getElementById('perClick').textContent = "Gain de click : " + countPerClick;
     }
-
 }

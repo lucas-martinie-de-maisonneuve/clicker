@@ -17,26 +17,36 @@ body {
 header {
     display: flex;
     align-items: center;
-    height: 50px;
-    background-color: rgba(130, 0, 217, 0.8);
     width: 100%;
     position: fixed;
     font-family: "Space Grotesk", sans-serif;
+}
 
+#title_rect {
+    margin: 0 1px 0 2px;
+    background-color: rgba(130, 0, 217, 0.8);
+    border-radius: 0 0 0 50%;
+    width: 68%;
 }
 
 #title {
-    width: 68%;
     text-align: center;
-    color:aliceblue;
+    color: aliceblue;
     font-size: 35px;
 }
 
-#shop {
+#shop_rect {
+    margin: 0 2px 0 1px;
+    background-color: rgba(130, 0, 217, 0.8);
+    border-radius: 0 0 50% 0;
     width: 32%;
+}
+
+#shop {
     text-align: center;
-    color:aliceblue;
+    color: aliceblue;
     font-size: 35px;
+    border-radius: 0 0 10% 10%;
 }
 
 main {
@@ -67,7 +77,7 @@ main {
     flex-direction: column;
     width: 250px;
     height: 30%;
-    background-color: rgba(128, 128, 128, 0.4); 
+    background-color: rgba(128, 128, 128, 0.4);
     align-items: center;
     justify-content: center;
     margin: 5%;
@@ -105,13 +115,14 @@ main {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
 }
 
 #clickCount {
     font-size: 50px;
     margin: 0
 }
+
 /* Vanny */
 #div-animation {
     position: relative;
