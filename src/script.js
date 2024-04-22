@@ -1,10 +1,12 @@
 // Click on Planet
 let clickCount = 0;
 let countPerClick = 0;
+let totalGained = 0
 
 document.addEventListener("DOMContentLoaded", function () {
     const clickButton = document.getElementById('clicker');
     const clickCountDisplay = document.getElementById('clickCount');
+    const totalClickDisplay = document.getElementById('totalClick');
 
     // Rotation Planet
     var rotation = 0;
@@ -28,11 +30,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     clickButton.addEventListener('click', function () {
-        if (countPerClick === 0)
+        if (countPerClick === 0) {
             clickCount++;
-        else
+            totalGained++;
+        }
+        else {
             clickCount += countPerClick;
+            totalGained += countPerClick
+        }
         clickCountDisplay.textContent = clickCount;
+        totalClickDisplay.textContent = "Total gained : " + totalGained;
         planet_width = 80;
         planet_height = 80;
         clickButton.style.width = (235 + planet_width) + "px";
