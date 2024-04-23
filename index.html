@@ -24,52 +24,44 @@
         </div>
     </header>
     <main>
-
         <!-- BACK -->
         <article class="article-back">
             <img src="image/planet2.png" alt="planet" class="planet2">
             <img src="image/planet2.png" alt="planet" class="planet3">
             <img src="image/planet2.png" alt="planet" class="planet4">
             <img src="image/planet2.png" alt="planet" class="planet5">
-         
-
-
-
-
         </article>
+
         <article class="article-front">
-
-        <!-- FRONT -->
-        <section class="click">
-            
-            <!-- Main Planet section-->
-            <div id="div-planet">
-                <div id="div-animation">
-                    <img src="/image/planet11.gif" alt="Planet pic" id="clicker">
+            <!-- FRONT -->
+            <section class="click">
+                <!-- Main Planet section-->
+                <div id="div-planet">
+                    <div id="div-animation">
+                        <img src="/image/planet11.gif" alt="Planet pic" id="clicker">
+                    </div>
                 </div>
-            </div>
+                <!-- Click section-->
+                <div id="rect-click">
+                    <hr>
+                    <p id="clickCount">0</p>
+                    <p id="perClick">Gain de click : 1</p>
+                    <p id="totalClick">Total gained : 0</p>
+                    <button class="button" onclick="clearGameData()"></button>
+                    <hr>
+                </div>
 
-            <!-- Click section-->
-            <div id="rect-click">
-                <hr>
-                <p id="clickCount">0</p>
-                <p id="perClick">Gain de click : 1</p>
-                <p id="totalClick">Total gained : 0</p>
-                <hr>
-            </div>
+            </section>
 
-        </section>
+            <!-- shop_list -->
+            <section class="shop_list" id="shop_list">
+            </section>
 
-        <!-- Facilities -->
-        <section class="facilities" id="facilities">
-        </section>
-
-        <!-- Upgrade -->
-        <section class="upgrade" id="upgrade">
-        </section>
-    </article>
+            <!-- Upgrade -->
+            <section class="upgrade" id="upgrade">
+            </section>
+        </article>
     </main>
-    
 </body>
 
 </html>

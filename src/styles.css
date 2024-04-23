@@ -85,6 +85,7 @@ main {
     align-items: center;
     justify-content: space-around;
     margin: 5%;
+    border-radius: 15%;
 }
 
 /*** Click Section ***/
@@ -96,9 +97,9 @@ main {
     align-items: center;
 }
 
-/***** FACILITIES & UPGRADE *****/
+/***** shop_list & UPGRADE *****/
 
-.facilities,
+.shop_list,
 .upgrade {
     background-color: rgba(138, 43, 226, 0.2);
     display: flex;
@@ -108,8 +109,18 @@ main {
     border-radius: 10px;
 }
 
-.facilities button,
+.shop_list button,
 .upgrade button {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px 10px 0 10px;
+    cursor: pointer;
+}
+
+.button {
     background: linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
     border: none;
     border-radius: 5px;
@@ -126,7 +137,7 @@ main {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
 }
 
 /***** ANIMATION *****/
@@ -157,8 +168,8 @@ main {
 
 .planet2, .planet3, .planet4, .planet5 {
     position: absolute;
-    top: 80%; 
-    left: 50%; 
+    top: 80%;
+    left: 50%;
     transform: translate(-50%, -50%);
 }
 
@@ -203,9 +214,9 @@ main {
 
 @keyframes slideRight {
     100% {
-        left: -90%; 
+        left: -90%;
     }
     0% {
-        left: calc(90vw + 100px); 
+        left: calc(90vw + 100px);
     }
 }
