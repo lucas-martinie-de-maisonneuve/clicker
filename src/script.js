@@ -1,8 +1,9 @@
 // Click on Planet
+let autoClick = 0
 let clickCount = 0;
 let countPerClick = 0;
 let totalGained = 0
-let buttonCosts = [10, 500, 5000];
+let buttonCosts = [10, 500, 5000, 10000];
 
 document.addEventListener("DOMContentLoaded", function () {
     const clickButton = document.getElementById('clicker');
@@ -16,8 +17,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let planet_width = 0
     let planet_height = 0
 
-    // rotatePlanet();
     updateButtons();
+    if (autoClick !=0) {
+        setInterval(AutomaticCount, autoClick);}
+
     clickButton.addEventListener('click', function () {
         if (countPerClick === 0) {
             clickCount++;
@@ -35,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
         clickButton.style.height = (235 + planet_height) + "px";
         planete_size();
     });
+
     function planete_size() {
         if (planet_height > 0) {
             setTimeout(function () {
@@ -46,11 +50,18 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 50)
         }
     }
+
     // Rotation Planet
     function rotatePlanet() {
         rotation += 0.5;
         clickButton.style.transform = 'translate(-50%, -50%) rotate(' + rotation + 'deg)';
         window.requestAnimationFrame(rotatePlanet);
+    }
+    
+    function AutomaticCount() {
+        let currentClickCount = parseInt(document.getElementById('clickCount').textContent);
+        currentClickCount++; 
+        document.getElementById('clickCount').textContent = currentClickCount;
     }
 
 });
@@ -67,13 +78,17 @@ function buy(costIndex) {
             countPerClick += 10;
         else if (cost === buttonCosts[2])
             countPerClick += 50;
-        document.getElementById('clickCount').textContent = currentClickCount;
-        document.getElementById('perClick').textContent = "Gain de click : " + countPerClick;
+        else if (cost === buttonCosts[3])
+            autoClick +=1000
 
+        document.getElementById('clickCount').textContent = currentClickCount;
+        document.getElementById('perClick').textContent = "Gain de click : " + countPerClick
+        ;
         buttonCosts[costIndex] = Math.floor(buttonCosts[costIndex] *= 1.33);
 
         updateButtons();
     }
+
 } function updateButtons() {
     let facilitiesSection = document.getElementById('facilities');
     let upgradeSection = document.getElementById('upgrade');
@@ -89,6 +104,5 @@ function buy(costIndex) {
             buy(i);
         };
         facilitiesSection.appendChild(button);
-
     }
 }
