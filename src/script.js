@@ -3,6 +3,7 @@ let clickCount = 0; // Number of clicks on the button
 let countPerClick = 0; // Number of clicks added per click
 let totalGained = 0; // Total clicks gained
 let buttonCosts = [10, 500, 5000]; // Costs of purchase buttons
+let bonusCount = [0,0,0]
 
 document.addEventListener("DOMContentLoaded", function () {
     const clickButton = document.getElementById('clicker'); // Click button
@@ -80,8 +81,9 @@ function buy(costIndex) {
         document.getElementById('clickCount').textContent = currentClickCount;
         document.getElementById('perClick').textContent = "Click Gain: " + countPerClick;
         // Increasing cost for next purchase
-        buttonCosts[costIndex] = Math.floor(buttonCosts[costIndex] *= 1.33);
-        // Updating purchase buttons
+        buttonCosts[costIndex] = Math.floor(buttonCosts[costIndex] *= 1.33); // Updating purchase buttons
+        bonusCount[costIndex] =  bonusCount[costIndex] + 1 ;// Number of time bonus has been purshased
+
         updateButtons();
     }
 }
@@ -89,21 +91,26 @@ function buy(costIndex) {
 // Function to update purchase buttons
 function updateButtons() {
     let facilitiesSection = document.getElementById('facilities'); // Facilities section
-    let upgradeSection = document.getElementById('upgrade'); // Upgrade section
     facilitiesSection.innerHTML = ""; // Resetting facilities section
-    upgradeSection.innerHTML = ""; // Resetting upgrade section
 
     // Creating purchase buttons for each cost
     for (let i = 0; i < buttonCosts.length; i++) {
         let cost = buttonCosts[i]; // Button cost
+        let count = bonusCount[i]; // Button count
         let button = document.createElement('button'); // Creating a button element
         button.className = 'button'; // Assigning a class to the button
+        let nbClicked = document.createElement('p'); // Creating a p element
+        nbClicked.className = "buttonclicked"
+        
         // Button text with cost and bonus click count
-        button.textContent = cost + " Clicks (Clicks + " + ((cost === buttonCosts[0]) ? 3 : (cost === buttonCosts[1]) ? 10 : 50) + ")";
+        button.textContent = cost + " Clicks (Clicks + " + ((cost === buttonCosts[0]) ? 3 : (cost === buttonCosts[1]) ? 10 : 50 )+ ")";
+        
+        nbClicked.textContent = count;
         // Assigning purchase function to button click event
         button.onclick = function () {
             buy(i);
         };
         facilitiesSection.appendChild(button); // Adding button to facilities section
+        facilitiesSection.appendChild(nbClicked); // Adding paragraph to facilities section
     }
 }
