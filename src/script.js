@@ -1,10 +1,11 @@
 // Initializing global variables
-let autoClick = 0
+let TimeClick = 0;
 let clickCount = 0; // Number of clicks on the button
-let countPerClick = 0; // Number of clicks added per click
+var nb = 0;
+
 let totalGained = 0; // Total clicks gained
-let buttonCosts = [10, 500, 5000, 10000]; // Costs of purchase buttons
-let bonusCount = [0,0,0]
+let buttonCosts = [10, 500, 5000,5]; // Costs of purchase buttons
+let bonusCount = [0,0,0,0];
 
 document.addEventListener("DOMContentLoaded", function () {
     const clickButton = document.getElementById('clicker'); // Click button
@@ -18,10 +19,13 @@ document.addEventListener("DOMContentLoaded", function () {
     let planet_width = 0;
     let planet_height = 0;
 
+    let countPerClick = 0; // Number of clicks added per click
+
     // Init purchase buttons
     updateButtons();
-    if (autoClick !=0) {
-        setInterval(AutomaticCount, autoClick);}
+    
+    // TimeClick !== 1000;
+    setInterval(AutomaticCount, 1000); 
 
     // Event listener for clicking the button
     clickButton.addEventListener('click', function () {
@@ -66,8 +70,10 @@ document.addEventListener("DOMContentLoaded", function () {
     
     function AutomaticCount() {
         let currentClickCount = parseInt(document.getElementById('clickCount').textContent);
-        currentClickCount++; 
+
+        currentClickCount = clickCount + nb; 
         document.getElementById('clickCount').textContent = currentClickCount;
+
     }
 
 });
@@ -86,9 +92,12 @@ function buy(costIndex) {
             countPerClick += 10;
         else if (cost === buttonCosts[2])
             countPerClick += 50;
-        else if (cost === buttonCosts[3])
-        autoClick +=1000
-    
+        else if (cost === buttonCosts[3]) {
+            nb += 1;
+            countPerClick += 0;
+            console.log(nb)
+        }
+
     // Updating display
         document.getElementById('clickCount').textContent = currentClickCount;
         document.getElementById('perClick').textContent = "Click Gain: " + countPerClick;
@@ -115,7 +124,10 @@ function updateButtons() {
         nbClicked.className = "buttonclicked"
         
         // Button text with cost and bonus click count
-        button.textContent = cost + " Clicks (Clicks + " + ((cost === buttonCosts[0]) ? 3 : (cost === buttonCosts[1]) ? 10 : 50 )+ ")";
+        if (cost === buttonCosts[0] || cost === buttonCosts[1] || cost === buttonCosts[2]) 
+            button.textContent = cost + " Clicks (Clicks + " + ((cost === buttonCosts[0]) ? 3 : (cost === buttonCosts[1]) ? 10 : 50 )+ ")";
+        else 
+            button.textContent = cost + " Clicks (Auto clicks + 0.1/s)";
         
         nbClicked.textContent = count;
         // Assigning purchase function to button click event
