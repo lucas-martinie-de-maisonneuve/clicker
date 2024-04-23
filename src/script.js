@@ -2,7 +2,7 @@
 let clickCount = 0;
 let countPerClick = 0;
 let totalGained = 0
-let buttonCosts = [10, 100, 1000];
+let buttonCosts = [10, 500, 5000];
 
 document.addEventListener("DOMContentLoaded", function () {
     const clickButton = document.getElementById('clicker');
@@ -72,8 +72,7 @@ function buy(costIndex) {
         document.getElementById('clickCount').textContent = currentClickCount;
         document.getElementById('perClick').textContent = "Gain de click : " + countPerClick;
 
-        buttonCosts[costIndex] *= 1.2;
-        buttonCosts[costIndex] = Math.floor(buttonCosts[costIndex]);
+        buttonCosts[costIndex] = Math.floor(buttonCosts[costIndex] *= 1.33);
 
         updateButtons();
     }
