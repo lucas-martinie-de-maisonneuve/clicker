@@ -1,3 +1,4 @@
+/***** GENERAL *****/
 * {
     margin: 0;
     padding: 0;
@@ -52,11 +53,12 @@ header {
 main {
     margin-top: 50px;
     display: flex;
-    flex-direction: row;
-    height: calc(100vh - 50px);
-    width: 100%;
+    flex: 1;
 }
 
+/***** MAIN PLANET & CLICK *****/
+
+/*** Planet Section ***/
 
 .click {
     width: 70%;
@@ -65,11 +67,13 @@ main {
     align-items: center;
 }
 
-#div-planet {
-    display: flex;
-    flex: 1;
-    height: 60%;
-    align-items: center;
+.rect-click p {
+    margin: 0px;
+}
+
+#clickCount {
+    font-size: 50px;
+    margin: 0
 }
 
 #rect-click {
@@ -83,9 +87,16 @@ main {
     margin: 5%;
 }
 
-.rect-click p {
-    margin: 0px;
+/*** Click Section ***/
+
+#div-planet {
+    display: flex;
+    flex: 1;
+    height: 60%;
+    align-items: center;
 }
+
+/***** FACILITIES & UPGRADE *****/
 
 .facilities,
 .upgrade {
@@ -115,17 +126,86 @@ main {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); 
 }
 
-#clickCount {
-    font-size: 50px;
-    margin: 0
+/***** ANIMATION *****/
+
+.article-back { 
+    position: absolute;
+    z-index: 1; 
+    width: 100;
 }
 
-/* Vanny */
+.article-front {
+    z-index: 2; 
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+
+/* Main Planet */
+
 #div-animation {
     position: relative;
     width: 200px;
     height: 200px;
+}
+
+/* Background planets */
+
+.planet2, .planet3, .planet4, .planet5 {
+    position: absolute;
+    top: 80%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+}
+
+.planet2 {
+    margin-top: 50px;
+    width: 50px; 
+    height: auto;
+    animation: slideLeft 20s linear infinite; 
+}
+
+.planet3 {
+    margin-top: 550px;
+    width: 10px; 
+    height: auto;
+    animation: slideLeft 100s linear infinite; 
+}
+
+.planet4 {
+    margin-top: 655px;
+    width: 25px; 
+    height: auto;
+    animation: slideLeft 55s linear infinite; 
+}
+
+.planet5 {
+    margin-top: 450px;
+    width: 20px; 
+    height: auto;
+    animation: slideRight 100s linear infinite;
+}
+
+
+@keyframes slideLeft {
+    0% {
+        top: 100%; /* Début de l'animation, à droite de la fenêtre */
+    }
+    100% {
+        left: calc(90vw + 100px); /* Fin de l'animation, déplacé tout à gauche */
+    }
+}
+
+
+@keyframes slideRight {
+    100% {
+        left: -90%; 
+    }
+    0% {
+        left: calc(90vw + 100px); 
+    }
 }
