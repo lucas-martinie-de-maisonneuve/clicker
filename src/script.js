@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let planet_height = 0
 
     // rotatePlanet();
-
+    updateButtons();
     clickButton.addEventListener('click', function () {
         if (countPerClick === 0) {
             clickCount++;
@@ -35,7 +35,17 @@ document.addEventListener("DOMContentLoaded", function () {
         clickButton.style.height = (235 + planet_height) + "px";
         planete_size();
     });
-
+    function planete_size() {
+        if (planet_height > 0) {
+            setTimeout(function () {
+                planet_height -= 1;
+                planet_width -= 1;
+                clickButton.style.width = (235 + planet_width) + "px";
+                clickButton.style.height = (235 + planet_height) + "px";
+                planete_size();
+            }, 50)
+        }
+    }
     // Rotation Planet
     function rotatePlanet() {
         rotation += 0.5;
