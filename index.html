@@ -11,6 +11,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jersey+15&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+
     <title>Clicker</title>
 </head>
 
@@ -33,28 +37,30 @@
         </article>
 
         <article class="article-front">
-            <!-- FRONT -->
-            <section class="click">
-                <!-- Main Planet section-->
-                <div id="div-planet">
-                    <div id="div-animation">
-                        <img src="/image/planet11.gif" alt="Planet pic" id="clicker">
-                    </div>
-                </div>
-                <!-- Click section-->
-                <div id="rect-click">
-                    <hr>
-                    <p id="clickCount">0</p>
-                    <p id="perClick">Gain de click : 1</p>
-                    <p id="totalClick">Total gained : 0</p>
-                    <button class="button" onclick="clearGameData()"></button>
-                    <hr>
-                </div>
 
-            </section>
+        <!-- FRONT -->
+        <section class="click">
 
-            <!-- shop_list -->
-            <section class="shop_list" id="shop_list">
+            <!-- Main Planet section-->
+            <div id="div-planet">
+                <div id="div-animation">
+                    <img src="/image/planet11.gif" alt="Planet pic" id="clicker">
+                </div>
+            </div>
+
+            <!-- Click section-->
+            <div id="rect-click">
+                <hr>
+                <p id="clickCount">0</p>
+                <p id="perClick">Gain de click : 1</p>
+                <p id="totalClick">Total gained : 0</p>
+                <button class="button" onclick="clearGameData()"></button>
+                <hr>
+            </div>
+        </section>
+
+            <!-- Facilities -->
+            <section class="facilities" id="facilities">
             </section>
 
             <!-- Upgrade -->

@@ -27,7 +27,7 @@ header {
     margin: 0 1px 0 2px;
     background-color: rgba(130, 0, 217, 0.8);
     border-radius: 0 0 0 50%;
-    width: 68%;
+    width: 58%;
 }
 
 #title {
@@ -40,7 +40,7 @@ header {
     margin: 0 2px 0 1px;
     background-color: rgba(130, 0, 217, 0.8);
     border-radius: 0 0 50% 0;
-    width: 32%;
+    width: 42%;
 }
 
 #shop {
@@ -61,7 +61,7 @@ main {
 /*** Planet Section ***/
 
 .click {
-    width: 70%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -97,19 +97,19 @@ main {
     align-items: center;
 }
 
-/***** shop_list & UPGRADE *****/
+/***** facilities & UPGRADE *****/
 
-.shop_list,
+.facilities,
 .upgrade {
     background-color: rgba(138, 43, 226, 0.2);
     display: flex;
     flex-direction: column;
-    width: 15%;
+    width: 20%;
     margin: 1% 1% 1% 0;
     border-radius: 10px;
 }
 
-.shop_list button,
+.facilities button,
 .upgrade button {
     background: linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
     border: none;
@@ -118,6 +118,24 @@ main {
     font-size: 16px;
     margin: 10px 10px 0 10px;
     cursor: pointer;
+    font-size: 18px;
+    width: 100%
+}
+
+.buttonclicked {
+    position: fixed;
+    z-index: 1;
+    right: 37%;
+    margin-top: 10px;
+}
+
+.div_button {
+    font-size: 32px;
+    font-family: "Space Mono", monospace;
+    font-weight: 400;
+    font-style: italic;
+    display: flex;
+    align-items: center;
 }
 
 .button {
@@ -142,14 +160,14 @@ main {
 
 /***** ANIMATION *****/
 
-.article-back { 
+.article-back {
     position: absolute;
-    z-index: 1; 
+    z-index: 1;
     width: 100;
 }
 
 .article-front {
-    z-index: 2; 
+    z-index: 2;
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -166,7 +184,10 @@ main {
 
 /* Background planets */
 
-.planet2, .planet3, .planet4, .planet5 {
+.planet2,
+.planet3,
+.planet4,
+.planet5 {
     position: absolute;
     top: 80%;
     left: 50%;
@@ -175,28 +196,28 @@ main {
 
 .planet2 {
     margin-top: 50px;
-    width: 50px; 
+    width: 50px;
     height: auto;
-    animation: slideLeft 20s linear infinite; 
+    animation: slideLeft 20s linear infinite;
 }
 
 .planet3 {
     margin-top: 550px;
-    width: 10px; 
+    width: 10px;
     height: auto;
-    animation: slideLeft 100s linear infinite; 
+    animation: slideLeft 100s linear infinite;
 }
 
 .planet4 {
     margin-top: 655px;
-    width: 25px; 
+    width: 25px;
     height: auto;
-    animation: slideLeft 55s linear infinite; 
+    animation: slideLeft 55s linear infinite;
 }
 
 .planet5 {
     margin-top: 450px;
-    width: 20px; 
+    width: 20px;
     height: auto;
     animation: slideRight 100s linear infinite;
 }
@@ -204,10 +225,13 @@ main {
 
 @keyframes slideLeft {
     0% {
-        top: 100%; /* Début de l'animation, à droite de la fenêtre */
+        top: 100%;
+        /* Début de l'animation, à droite de la fenêtre */
     }
+
     100% {
-        left: calc(90vw + 100px); /* Fin de l'animation, déplacé tout à gauche */
+        left: calc(90vw + 100px);
+        /* Fin de l'animation, déplacé tout à gauche */
     }
 }
 
@@ -216,6 +240,7 @@ main {
     100% {
         left: -90%;
     }
+
     0% {
         left: calc(90vw + 100px);
     }
