@@ -5,42 +5,37 @@ var nb = 1;
 let totalGained = 0; // Total clicks gained
 
 
-let buttonCosts = [15, 500, 1500, 15000, 30000, 100000, 1000, 5000, 10000, 50000, 100000, 300000]; // Costs of purchase buttons
+let buttonCosts = [15, 500, 1500, 10, 30000, 100000, 1000, 5000, 10000, 50000, 100000, 300000]; // Costs of purchase buttons
 let facilitiesName = ["Spacecraft SCV-70", "Satellite DeltaIV", "Rocket Atlas XXIII", "Space shuttle Lazlo-vl", "Queen Madec-28", "HLV Venture G X II", "Shooting Star", "Comet", "Moon", "Planet-251HLV f", "Black hole", "Mount Olympus"]
 let bonusCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
+let countPerClick = 0
 document.addEventListener("DOMContentLoaded", function () {
     const clickButton = document.getElementById('clicker'); // Click button
     const clickCountDisplay = document.getElementById('clickCount'); // Display of click count
     const totalClickDisplay = document.getElementById('totalClick'); // Display of total clicks
-
+    
     // Load saved data if available
     loadGameData();
-
+    
     // Planet rotation
     var rotation = 0;
-
+    
     // Planet size
     let planet_width = 0;
     let planet_height = 0;
-
-
+    
+    
     // Init purchase buttons
     updateButtons();
     
-    // TimeClick !== 1000;
-    setInterval(AutomaticCount, 1000); 
-
+    // setInterval(AutomaticCount, 1000); 
+    
     // Event listener for clicking the button
     clickButton.addEventListener('click', function () {
         // Incrementing click count and total gained
-        if (countPerClick === 0) {
-            clickCount++;
-            totalGained++;
-        } else {
-            clickCount += countPerClick;
-            totalGained += countPerClick;
-        }
+        clickCount += countPerClick;
+        totalGained += countPerClick;
+        
         // Updating display
         clickCountDisplay.textContent = clickCount;
         totalClickDisplay.textContent = "Total gained : " + totalGained;
@@ -50,11 +45,13 @@ document.addEventListener("DOMContentLoaded", function () {
         clickButton.style.width = (235 + planet_width) + "px";
         clickButton.style.height = (235 + planet_height) + "px";
         planet_size(); // Calling function to decrease planet size
-
+        
         // Save game data
         saveGameData();
     });
-
+    // if (!TimeClick == 1000)
+    setInterval(AutomaticCount, 1000);
+    
     // Function to gradually decrease planet size
     function planet_size() {
         if (planet_height > 0) {
@@ -75,13 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
         window.requestAnimationFrame(rotatePlanet);
     }
     
-    function AutomaticCount() {
-        let currentClickCount = parseInt(document.getElementById('clickCount').textContent);
-
-        currentClickCount = clickCount + nb; 
-        document.getElementById('clickCount').textContent = currentClickCount;
-
-    }
 
 });
 
@@ -123,9 +113,16 @@ function buy(costIndex) {
         saveGameData();
     }
 }
+function AutomaticCount() {
+    let currentClickCount = parseInt(document.getElementById('clickCount').textContent);
 
+    currentClickCount = currentClickCount + nb; 
+    document.getElementById('clickCount').textContent = currentClickCount;
+
+}
 // Function to update purchase buttons
 function updateButtons() {
+
     let facilitiesSection = document.getElementById('facilities'); // Facilities section
     facilitiesSection.innerHTML = "<h2 class='BonusTitle'>Facilities</h2>"; // Resetting facilities section
 
@@ -223,8 +220,8 @@ function clearGameData() {
     clickCount = 0;
     countPerClick = 1;
     totalGained = 0;
-    buttonCosts = [10, 500, 5000]; // Reset button costs
-    bonusCount = [0, 0, 0];
+    buttonCosts = [15, 500, 1500, 10, 30000, 100000, 1000, 5000, 10000, 50000, 100000, 300000]; 
+    bonusCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
     // Update display
     document.getElementById('clickCount').textContent = clickCount;
