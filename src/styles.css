@@ -122,6 +122,23 @@ main {
     width: 100%
 }
 
+.info {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 323px;
+    top: 80px;
+    height: 60px;
+    width: 100px;
+    text-align: center;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+    border: none;
+    border-radius: 5px;
+    display: none;
+}
+
+
 .buttonclicked {
     position: fixed;
     z-index: 1;
@@ -138,6 +155,7 @@ main {
     align-items: center;
 }
 
+
 .button {
     background: linear-gradient(to right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
     border: none;
@@ -146,6 +164,10 @@ main {
     font-size: 16px;
     margin: 10px 10px 0 10px;
     cursor: pointer;
+}
+
+.button:hover .info{
+    display: block;
 }
 
 #clicker {

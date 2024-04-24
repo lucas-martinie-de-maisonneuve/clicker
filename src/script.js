@@ -121,7 +121,8 @@ function updateButtons() {
         // Button text with cost and bonus click count
         button.innerHTML = `
                 <p>${cost} Clicks</p>
-                <p>(Clicks + ${(cost === buttonCosts[0]) ? 3 : (cost === buttonCosts[1]) ? 10 : 50})`;
+                <p>(Clicks + ${(cost === buttonCosts[0]) ? 3 : (cost === buttonCosts[1]) ? 10 : 50})</p>
+                <p class="info">test</p>`;
 
         nbClicked.textContent = count;
         // Assigning purchase function to button click event
