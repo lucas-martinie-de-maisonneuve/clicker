@@ -1,7 +1,7 @@
 // Initializing global variables
 let TimeClick = 0;
 let clickCount = 0; // Number of clicks on the button
-var nb = 0;
+var nb = 1;
 let totalGained = 0; // Total clicks gained
 
 
@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const clickCountDisplay = document.getElementById('clickCount'); // Display of click count
     const totalClickDisplay = document.getElementById('totalClick'); // Display of total clicks
 
+    // Load saved data if available
+    loadGameData();
+
     // Planet rotation
     var rotation = 0;
 
@@ -21,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let planet_width = 0;
     let planet_height = 0;
 
-    let countPerClick = 0; // Number of clicks added per click
 
     // Init purchase buttons
     updateButtons();
@@ -48,6 +50,9 @@ document.addEventListener("DOMContentLoaded", function () {
         clickButton.style.width = (235 + planet_width) + "px";
         clickButton.style.height = (235 + planet_height) + "px";
         planet_size(); // Calling function to decrease planet size
+
+        // Save game data
+        saveGameData();
     });
 
     // Function to gradually decrease planet size
@@ -108,7 +113,14 @@ function buy(costIndex) {
         // Updating purchase buttons
         bonusCount[costIndex] = bonusCount[costIndex] + 1;// Number of time bonus has been purshased
 
+        buttonCosts[costIndex] = Math.floor(buttonCosts[costIndex] *= 1.33);
+
+
+        // Update button display
         updateButtons();
+
+        // Save game data
+        saveGameData();
     }
 }
 
@@ -176,3 +188,49 @@ function updateButtons() {
 
 
 };
+
+// Function to save game data
+function saveGameData() {
+    localStorage.setItem('clickCount', clickCount);
+    localStorage.setItem('countPerClick', countPerClick);
+    localStorage.setItem('totalGained', totalGained);
+    localStorage.setItem('buttonCosts', JSON.stringify(buttonCosts)); // Save button costs
+    localStorage.setItem('bonusCount', JSON.stringify(bonusCount)); // Save bonus count
+}
+
+// Function to load game data
+function loadGameData() {
+    if (localStorage.getItem('clickCount') !== null) {
+        clickCount = parseInt(localStorage.getItem('clickCount'));
+        countPerClick = parseInt(localStorage.getItem('countPerClick'));
+        totalGained = parseInt(localStorage.getItem('totalGained'));
+        buttonCosts = JSON.parse(localStorage.getItem('buttonCosts')); // Load button costs
+        bonusCount = JSON.parse(localStorage.getItem('bonusCount')); // Load bonus count
+
+        // Update display with loaded data
+        document.getElementById('clickCount').textContent = clickCount;
+        document.getElementById('perClick').textContent = "Gain de click : " + countPerClick;
+        document.getElementById('totalClick').textContent = "Total gained : " + totalGained;
+        updateButtons(); // Update buttons display
+    }
+}
+
+// Function to clear game data and reset the game
+function clearGameData() {
+    localStorage.clear(); // Remove all saved data
+
+    // Reset variables
+    clickCount = 0;
+    countPerClick = 1;
+    totalGained = 0;
+    buttonCosts = [10, 500, 5000]; // Reset button costs
+    bonusCount = [0, 0, 0];
+
+    // Update display
+    document.getElementById('clickCount').textContent = clickCount;
+    document.getElementById('perClick').textContent = "Gain de click : " + countPerClick;
+    document.getElementById('totalClick').textContent = "Total gained : " + totalGained;
+
+    // Update buttons
+    updateButtons();
+}
