@@ -32,12 +32,13 @@ document.addEventListener("DOMContentLoaded", function () {
     
     // Event listener for clicking the button
     clickButton.addEventListener('click', function () {
+        let currentClickCount = parseInt(document.getElementById('clickCount').textContent);
         // Incrementing click count and total gained
-        clickCount += countPerClick;
+        currentClickCount += countPerClick;
         totalGained += countPerClick;
         
         // Updating display
-        clickCountDisplay.textContent = clickCount;
+        clickCountDisplay.textContent = currentClickCount;
         totalClickDisplay.textContent = "Total gained : " + totalGained;
         // Increasing planet size
         planet_width = 80;
