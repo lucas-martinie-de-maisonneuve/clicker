@@ -103,7 +103,7 @@ function buy(costIndex) {
         document.getElementById('perClick').textContent = "Click Gain: " + countPerClick;
         // Increasing cost for next purchase
         buttonCosts[costIndex] = Math.floor(buttonCosts[costIndex] *= 1.33); // Updating purchase buttons
-        bonusCount[costIndex] =  bonusCount[costIndex] + 1 ;// Number of time bonus has been purshased
+        bonusCount[costIndex] = bonusCount[costIndex] + 1;// Number of time bonus has been purshased
 
         updateButtons();
     }
@@ -122,19 +122,24 @@ function updateButtons() {
         button.className = 'button'; // Assigning a class to the button
         let nbClicked = document.createElement('p'); // Creating a p element
         nbClicked.className = "buttonclicked"
-        
+        let div_button = document.createElement('div'); // Creating a p element
+        div_button.className = "div_button"
+
         // Button text with cost and bonus click count
         if (cost === buttonCosts[0] || cost === buttonCosts[1] || cost === buttonCosts[2]) 
-            button.textContent = cost + " Clicks (Clicks + " + ((cost === buttonCosts[0]) ? 3 : (cost === buttonCosts[1]) ? 10 : 50 )+ ")";
+            button.innerHTML = `
+                <p>${cost} Clicks</p>
+                <p>(Clicks + ${(cost === buttonCosts[0]) ? 3 : (cost === buttonCosts[1]) ? 10 : 50})`;
         else 
             button.textContent = cost + " Clicks (Auto clicks + 0.1/s)";
-        
+
         nbClicked.textContent = count;
         // Assigning purchase function to button click event
         button.onclick = function () {
             buy(i);
         };
-        facilitiesSection.appendChild(button); // Adding button to facilities section
-        facilitiesSection.appendChild(nbClicked); // Adding paragraph to facilities section
+        facilitiesSection.appendChild(div_button)
+        div_button.appendChild(button); // Adding button to facilities section
+        div_button.appendChild(nbClicked); // Adding paragraph to facilities section
     }
 }
