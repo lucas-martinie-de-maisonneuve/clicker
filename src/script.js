@@ -1,12 +1,13 @@
 // Initializing global variables
 let TimeClick = 0;
 let clickCount = 0; // Number of clicks on the button
-var nb = 0;
+let nb = 0;
 let totalGained = 0; // Total clicks gained
+let trueclick = 0;
 let countPerClick = 1; 
 
 
-let buttonCosts = [2, 3, 4, 15000, 30000, 100000, 1000, 5000, 10000, 50000, 100000, 300000]; // Costs of purchase buttons
+let buttonCosts = [15, 150, 1500, 15000, 30000, 100000, 1000, 5000, 10000, 50000, 100000, 300000]; // Costs of purchase buttons
 let facilitiesName = ["Spacecraft SCV-70", "Satellite DeltaIV", "Rocket Atlas XXIII", "Space shuttle Lazlo-vl", "Queen Madec-28", "HLV Venture G X II", "Shooting Star", "Comet", "Moon", "Planet-251HLV f", "Black hole", "Mount Olympus"]
 let bonusCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
@@ -46,10 +47,13 @@ document.addEventListener("DOMContentLoaded", function () {
         planet_height = 80;
         clickButton.style.width = (235 + planet_width) + "px";
         clickButton.style.height = (235 + planet_height) + "px";
+
         planet_size(); // Calling function to decrease planet size
         updateButtons();
 
     });
+
+    // setInterval(AutomaticCount,100);
 
     // Function to gradually decrease planet size
     function planet_size() {
@@ -71,14 +75,6 @@ document.addEventListener("DOMContentLoaded", function () {
         rotation += 0.5;
         clickButton.style.transform = 'translate(-50%, -50%) rotate(' + rotation + 'deg)';
         window.requestAnimationFrame(rotatePlanet);
-    }
-    
-    function AutomaticCount() {
-        let currentClickCount = parseInt(document.getElementById('clickCount').textContent);
-
-        currentClickCount = clickCount + nb; 
-        document.getElementById('clickCount').textContent = currentClickCount;
-
     }
 
 });
@@ -109,16 +105,22 @@ function buy(costIndex) {
         // Updating display
         document.getElementById('clickCount').textContent = currentClickCount;
         document.getElementById('perClick').textContent = "Click Gain : " + countPerClick;
-        console.log(buttonCosts[costIndex])
         
         // Increasing cost for next purchase
         buttonCosts[costIndex] = Math.floor(buttonCosts[costIndex] *= 1.33); 
-        console.log(buttonCosts[costIndex])
         // Updating purchase buttons
         bonusCount[costIndex] = bonusCount[costIndex] + 1;// Number of time bonus has been purshased
         updateButtons();
 
     }
+}
+
+function AutomaticCount() {
+    trueclick += nb
+    currentClickCount = Math.floor(trueclick);
+    document.getElementById('clickCount').textContent = currentClickCount;
+    totalGained += nb
+    document.getElementById('totalClick').textContent = "Total gained : " + Math.floor(totalGained);
 }
 
 // Function to update purchase buttons
@@ -134,7 +136,9 @@ function updateButtons() {
     for (let i = 0; i < buttonCosts.length; i++) {
         let buttonName = facilitiesName[i]
         let cost = buttonCosts[i]; // Button cost
-        let count = bonusCount[i]; // Button count        
+        let count = bonusCount[i]; // Button count   
+        
+    
 
         let button = document.createElement('button'); // Creating a button element
         button.className = 'button'; // Assigning a class to the button
@@ -146,13 +150,14 @@ function updateButtons() {
         img_button.className = "img_logo"
         img_button.src= `image/logo${i}.png`;
 
-        if (totalGained >= cost) {
+        if (totalGained >= (buttonCosts[i])) {
+            console.log(buttonCosts[i])
             // Button text with cost and bonus click count
             if (i < 3) {
                 button.innerHTML = `
                     <p class="FU-title"> ${buttonName} </p>
                     <p>${cost} Clicks</p>
-                    <p>(Clicks + ${(cost === buttonCosts[0]) ? 3 : (cost === buttonCosts[1]) ? 2 : 4})`}
+                    <p>(Clicks + ${(cost === buttonCosts[0]) ? 3 : (cost === buttonCosts[1]) ? 15 : 1500})`}
     
             else if (i <6){
                 button.innerHTML = `
@@ -185,9 +190,6 @@ function updateButtons() {
         div_button.appendChild(nbClicked); // Adding paragraph to facilities section
         div_button.appendChild(button); // Adding button to facilities section
         div_button.appendChild(img_button); // Adding logo to facilities section
-
-
-
      
             if (i < 6 ) {
                 facilitiesSection.appendChild(div_button)
@@ -235,7 +237,7 @@ function clearGameData() {
     clickCount = 0;
     countPerClick = 1;
     totalGained = 0;
-    buttonCosts = [2, 3, 4, 10, 30000, 100000, 1000, 5000, 100000, 50000, 100000, 300000];
+    buttonCosts = [15, 150, 1500, 15000, 30000, 100000, 1000, 5000, 100000, 50000, 100000, 300000];
     bonusCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     trueclick = 0
     // Update display
