@@ -1,14 +1,15 @@
 // Initializing global variables
-let TimeClick = 0;
+let TimeClick = 100;
 let clickCount = 0; // Number of clicks on the button
-var nb = 1;
+var nb = 0.00;
 let totalGained = 0; // Total clicks gained
+let trueclick = 0
 
-
-let buttonCosts = [15, 500, 1500, 10, 30000, 100000, 1000, 5000, 10000, 50000, 100000, 300000]; // Costs of purchase buttons
+let buttonCosts = [15, 500, 1500, 20, 30000, 100000, 1000, 5000, 10000, 50000, 100000, 300000]; // Costs of purchase buttons
 let facilitiesName = ["Spacecraft SCV-70", "Satellite DeltaIV", "Rocket Atlas XXIII", "Space shuttle Lazlo-vl", "Queen Madec-28", "HLV Venture G X II", "Shooting Star", "Comet", "Moon", "Planet-251HLV f", "Black hole", "Mount Olympus"]
 let bonusCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 let countPerClick = 0
+
 document.addEventListener("DOMContentLoaded", function () {
     const clickButton = document.getElementById('clicker'); // Click button
     const clickCountDisplay = document.getElementById('clickCount'); // Display of click count
@@ -27,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
     
     // Init purchase buttons
     updateButtons();
-    
     // setInterval(AutomaticCount, 1000); 
     
     // Event listener for clicking the button
@@ -36,10 +36,11 @@ document.addEventListener("DOMContentLoaded", function () {
         // Incrementing click count and total gained
         currentClickCount += countPerClick;
         totalGained += countPerClick;
+        trueclick += countPerClick
         
         // Updating display
         clickCountDisplay.textContent = currentClickCount;
-        totalClickDisplay.textContent = "Total gained : " + totalGained;
+        totalClickDisplay.textContent = "Total gained : " + Math.floor(totalGained);
         // Increasing planet size
         planet_width = 80;
         planet_height = 80;
@@ -47,11 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
         clickButton.style.height = (235 + planet_height) + "px";
         planet_size(); // Calling function to decrease planet size
         
-        // Save game data
-        saveGameData();
     });
     // if (!TimeClick == 1000)
-    setInterval(AutomaticCount, 1000);
+    setInterval(AutomaticCount, 100);
     
     // Function to gradually decrease planet size
     function planet_size() {
@@ -75,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
 
 });
+setInterval(saveGameData, 2000)
 
 // Function for purchasing a bonus
 function buy(costIndex) {
@@ -82,6 +82,7 @@ function buy(costIndex) {
     let currentClickCount = parseInt(document.getElementById('clickCount').textContent); // Current click count
     if (currentClickCount >= cost) { // Checking if user has enough clicks
         currentClickCount -= cost; // Subtracting cost from current clicks
+        trueclick -= cost
         clickCount = currentClickCount; // Updating click count
         // Adding bonus click count based on cost
         if (cost === buttonCosts[0])
@@ -91,9 +92,8 @@ function buy(costIndex) {
         else if (cost === buttonCosts[2])
             countPerClick += 50;
         else if (cost === buttonCosts[3]) {
-            nb += 1;
+            nb += 0.05;
             countPerClick += 0;
-            console.log(nb)
         }
 
     // Updating display
@@ -110,15 +110,14 @@ function buy(costIndex) {
         // Update button display
         updateButtons();
 
-        // Save game data
-        saveGameData();
     }
 }
 function AutomaticCount() {
-    let currentClickCount = parseInt(document.getElementById('clickCount').textContent);
-
-    currentClickCount = currentClickCount + nb; 
+    trueclick +=nb
+    currentClickCount = Math.floor(trueclick);
     document.getElementById('clickCount').textContent = currentClickCount;
+    totalGained += nb
+    document.getElementById('totalClick').textContent = "Total gained : " + Math.floor(totalGained);
 
 }
 // Function to update purchase buttons
@@ -189,7 +188,8 @@ function updateButtons() {
 
 // Function to save game data
 function saveGameData() {
-    localStorage.setItem('clickCount', clickCount);
+    let currentClickCount = parseInt(document.getElementById('clickCount').textContent); // Current click count
+    localStorage.setItem('clickCount', currentClickCount);
     localStorage.setItem('countPerClick', countPerClick);
     localStorage.setItem('totalGained', totalGained);
     localStorage.setItem('buttonCosts', JSON.stringify(buttonCosts)); // Save button costs
@@ -204,12 +204,14 @@ function loadGameData() {
         totalGained = parseInt(localStorage.getItem('totalGained'));
         buttonCosts = JSON.parse(localStorage.getItem('buttonCosts')); // Load button costs
         bonusCount = JSON.parse(localStorage.getItem('bonusCount')); // Load bonus count
-
         // Update display with loaded data
         document.getElementById('clickCount').textContent = clickCount;
         document.getElementById('perClick').textContent = "Gain de click : " + countPerClick;
         document.getElementById('totalClick').textContent = "Total gained : " + totalGained;
         updateButtons(); // Update buttons display
+
+        // -------------> nb
+        // -------------> trueclick
     }
 }
 
@@ -223,7 +225,7 @@ function clearGameData() {
     totalGained = 0;
     buttonCosts = [15, 500, 1500, 10, 30000, 100000, 1000, 5000, 10000, 50000, 100000, 300000]; 
     bonusCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
+    trueclick = 0
     // Update display
     document.getElementById('clickCount').textContent = clickCount;
     document.getElementById('perClick').textContent = "Gain de click : " + countPerClick;
