@@ -204,7 +204,10 @@ button {
     margin:10px 0 0;
     cursor: pointer;
     width: 90%;
+}
 
+.button:hover .info{
+    display: block;
 }
 
 #clicker {
