@@ -98,13 +98,23 @@ function buy(costIndex) {
         if (cost === buttonCosts[0])
             countPerClick += 3
         else if (cost === buttonCosts[1])
-            countPerClick += 10;
+            countPerClick += 15;
         else if (cost === buttonCosts[2])
-            countPerClick += 50;
+            countPerClick += 150;
         else if (cost === buttonCosts[3]) {
             nb += 0.05;
             countPerClick += 0;
         }
+        else if (cost === buttonCosts[4]) {
+            nb += 0.5;
+            countPerClick += 0;
+        }
+        else if (cost === buttonCosts[5]) {
+            nb += 5;
+            countPerClick += 0;
+        }
+
+
 
         // Updating display
         document.getElementById('clickCount').textContent = currentClickCount;
@@ -166,8 +176,9 @@ function updateButtons() {
             else if (i <6){
                 button.innerHTML = `
                 <p class="FU-title"> ${buttonName}</p>
-                <p> ${cost} Clicks (Auto clicks + 0.1/s)</p>
-                `  }
+                <p> ${cost} Clicks (Auto clicks + ${(cost === buttonCosts[3]) ? 0.1 : (cost === buttonCosts[4]) ? 1 : 10}/s) </p>
+                ` 
+             }
                 else if (i <9){
 
                     button.innerHTML = `
