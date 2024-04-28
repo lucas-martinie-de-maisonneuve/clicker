@@ -5,11 +5,12 @@ var nb = 0.00;
 let totalGained = 0; // Total clicks gained
 let trueclick = 0;
 let countPerClick = 1;
+let multiplication_list = [3, 15, 150, 0.05, 0.5, 5]
 
 
 let buttonCosts = [15, 150, 1500, 15000, 30000, 100000, 1000, 5000, 10000, 50000, 100000, 300000]; // Costs of purchase buttons
 let initial_buttonCosts = [15, 150, 1500, 15000, 30000, 100000, 1000, 5000, 10000, 50000, 100000, 300000]; // Costs of purchase buttons
-let facilitiesName = ["Spacecraft SCV-70", "Satellite DeltaIV", "Rocket Atlas XXIII", "Space shuttle Lazlo-vl", "Queen Madec-28", "HLV Venture G X II", "Shooting Star", "Comet", "Moon", "Planet-251HLV f", "Black hole", "Mount Olympus"]
+let facilitiesName = ["Spacecraft SCV-70", "Satellite DeltaIV", "Rocket Atlas XXIII", "Space shuttle Lazlo-vl", "Queen Madec-28", "HLVenture G X II", "Shooting Star", "Comet", "Moon", "Planet-251HLV f", "Black hole", "Mount Olympus"]
 let bonusCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 
@@ -39,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Incrementing click count and total gained
         currentClickCount += countPerClick;
         totalGained += countPerClick;
-        trueclick += countPerClick
+        trueclick += countPerClick;
 
         // Updating display
         clickCountDisplay.textContent = currentClickCount;
@@ -95,6 +96,9 @@ function buy(costIndex) {
         trueclick -= cost
         clickCount = currentClickCount; // Updating click count
         // Adding bonus click count based on cost
+
+        // Facilities
+
         if (cost === buttonCosts[0])
             countPerClick += 3
         else if (cost === buttonCosts[1])
@@ -113,6 +117,41 @@ function buy(costIndex) {
             nb += 5;
             countPerClick += 0;
         }
+
+        // Upgrade
+
+        else if (cost === buttonCosts[6]) {
+            multiplication_list[0] *= 2;
+            countPerClick += 0;
+        }
+
+        else if (cost === buttonCosts[7]) {
+            multiplication_list[1] *= 2;
+            countPerClick += 0;
+        }    
+        
+        else if (cost === buttonCosts[8]) {
+            multiplication_list[2] *= 2;
+            countPerClick += 0;
+        }  
+
+        else if (cost === buttonCosts[9]) {
+            multiplication_list[3] *= 5;
+            multiplication += 5;
+            countPerClick += 0;
+        }   
+        
+        else if (cost === buttonCosts[10]) {
+            multiplication_list[4] *= 5;
+            countPerClick += 0;
+        }
+
+        else if (cost === buttonCosts[11]) {
+            multiplication_list[5] *= 5;
+            countPerClick += 0;
+        }
+
+        countPerClick = multiplication_list[0] * bonusCount [0] + multiplication_list[1] * bonusCount [1] + multiplication_list[2] * bonusCount [2] + 1; 
 
 
 
@@ -171,26 +210,29 @@ function updateButtons() {
                 button.innerHTML = `
                     <p class="FU-title"> ${buttonName} </p>
                     <p>${cost} Clicks</p>
-                    <p>(Clicks + ${(cost === buttonCosts[0]) ? 3 : (cost === buttonCosts[1]) ? 15 : 150})`}
+                    <p>(Clicks + ${(cost === buttonCosts[0]) ? 3 : (cost === buttonCosts[1]) ? 15 : 150})</p>`}
 
             else if (i <6){
                 button.innerHTML = `
                 <p class="FU-title"> ${buttonName}</p>
-                <p> ${cost} Clicks (Auto clicks + ${(cost === buttonCosts[3]) ? 0.1 : (cost === buttonCosts[4]) ? 1 : 10}/s) </p>
+                <p>${cost} Clicks</p>
+
+                <p>(Auto clicks + ${(cost === buttonCosts[3]) ? 0.1 : (cost === buttonCosts[4]) ? 1 : 10}/s) </p>
                 ` 
              }
                 else if (i <9){
 
                     button.innerHTML = `
                     <p class="FU-title"> ${buttonName}</p>
-                    <p> ${cost} Clicks (Clicks x2)</p>
-                    `
+                    <p>${cost} Clicks</p>
+                    <p>(${(cost === buttonCosts[6]) ?  `${facilitiesName[0]} x 2 ` : (cost === buttonCosts[7]) ?  `${facilitiesName[1]} x 2 ` :  `${facilitiesName[2]} x 2 `} )</p>`
                 }
                 else {
                     button.innerHTML = `
                     <p class="FU-title"> ${buttonName}</p>
-                    <p> ${cost} Clicks (Auto Clicks x5)</p>
-                    `
+                    <p>${cost} Clicks</p>
+                    <p>(${(cost === buttonCosts[9]) ?  `${facilitiesName[3]} x 2 ` : (cost === buttonCosts[10]) ?  `${facilitiesName[4]} x 2 ` :  `${facilitiesName[5]} x 2 `} )</p>`
+                    
 
                 };
 
