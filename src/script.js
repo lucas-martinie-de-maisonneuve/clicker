@@ -3,11 +3,12 @@ let TimeClick = 0;
 let clickCount = 0; // Number of clicks on the button
 let nb = 0;
 let totalGained = 0; // Total clicks gained
-let trueclick = 0;
+let trueclick = 0.00;
 let countPerClick = 1; 
 
 
 let buttonCosts = [15, 150, 1500, 15000, 30000, 100000, 1000, 5000, 10000, 50000, 100000, 300000]; // Costs of purchase buttons
+let initial_buttonCosts = [15, 150, 1500, 15000, 30000, 100000, 1000, 5000, 10000, 50000, 100000, 300000]; // Costs of purchase buttons
 let facilitiesName = ["Spacecraft SCV-70", "Satellite DeltaIV", "Rocket Atlas XXIII", "Space shuttle Lazlo-vl", "Queen Madec-28", "HLV Venture G X II", "Shooting Star", "Comet", "Moon", "Planet-251HLV f", "Black hole", "Mount Olympus"]
 let bonusCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
@@ -38,9 +39,10 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             clickCount += countPerClick;
             totalGained += countPerClick;
+            trueclick += countPerClick;
         }
         // Updating display
-        clickCountDisplay.textContent = clickCount;
+        // clickCountDisplay.textContent = clickCount;
         totalClickDisplay.textContent = " Total Gained: " + totalGained;
         // Increasing planet size
         planet_width = 80;
@@ -53,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-    // setInterval(AutomaticCount,100);
+    setInterval(AutomaticCount,100);
 
     // Function to gradually decrease planet size
     function planet_size() {
@@ -89,6 +91,7 @@ function buy(costIndex) {
      // Current click count
     if (currentClickCount >= cost) { // Checking if user has enough clicks
         currentClickCount -= cost; // Subtracting cost from current clicks
+        trueclick -= cost
         clickCount = currentClickCount; // Updating click count
         // Adding bonus click count based on cost
         if (cost === buttonCosts[0])
@@ -150,14 +153,13 @@ function updateButtons() {
         img_button.className = "img_logo"
         img_button.src= `image/logo${i}.png`;
 
-        if (totalGained >= (buttonCosts[i])) {
-            console.log(buttonCosts[i])
+        if (totalGained >= initial_buttonCosts[i]) {
             // Button text with cost and bonus click count
             if (i < 3) {
                 button.innerHTML = `
                     <p class="FU-title"> ${buttonName} </p>
                     <p>${cost} Clicks</p>
-                    <p>(Clicks + ${(cost === buttonCosts[0]) ? 3 : (cost === buttonCosts[1]) ? 15 : 1500})`}
+                    <p>(Clicks + ${(cost === buttonCosts[0]) ? 3 : (cost === buttonCosts[1]) ? 10 : 50})`}
     
             else if (i <6){
                 button.innerHTML = `
@@ -237,7 +239,7 @@ function clearGameData() {
     clickCount = 0;
     countPerClick = 1;
     totalGained = 0;
-    buttonCosts = [15, 150, 1500, 15000, 30000, 100000, 1000, 5000, 100000, 50000, 100000, 300000];
+    buttonCosts = [15, 150, 1500, 15000, 30000, 100000, 1000, 5000, 10000, 50000, 100000, 300000];
     bonusCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     trueclick = 0
     // Update display
