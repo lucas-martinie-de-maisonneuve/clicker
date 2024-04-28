@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 });
-setInterval(saveGameData, 2000)
+setInterval(saveGameData, 1000)
 
 // Function for purchasing a bonus
 function buy(costIndex) {
@@ -201,10 +201,11 @@ function updateButtons() {
 
 // Function to save game data
 function saveGameData() {
-    let currentClickCount = parseInt(document.getElementById('clickCount').textContent); // Current click count
-    localStorage.setItem('clickCount', currentClickCount);
+    localStorage.clear()
+    localStorage.setItem('clickCount', trueclick);
     localStorage.setItem('countPerClick', countPerClick);
     localStorage.setItem('totalGained', totalGained);
+    localStorage.setItem('nb', nb); // Save auto-click parameters
     localStorage.setItem('buttonCosts', JSON.stringify(buttonCosts)); // Save button costs
     localStorage.setItem('bonusCount', JSON.stringify(bonusCount)); // Save bonus count
 }
@@ -212,21 +213,21 @@ function saveGameData() {
 // Function to load game data
 function loadGameData() {
     if (localStorage.getItem('clickCount') !== null) {
-        clickCount = parseInt(localStorage.getItem('clickCount'));
+        let click = parseInt(localStorage.getItem('clickCount'));
         countPerClick = parseInt(localStorage.getItem('countPerClick'));
         totalGained = parseInt(localStorage.getItem('totalGained'));
+        nb = parseFloat(localStorage.getItem('nb')); // Load auto-click parameters
         buttonCosts = JSON.parse(localStorage.getItem('buttonCosts')); // Load button costs
         bonusCount = JSON.parse(localStorage.getItem('bonusCount')); // Load bonus count
         // Update display with loaded data
-        document.getElementById('clickCount').textContent = clickCount;
-        document.getElementById('perClick').textContent = "Gain de click : " + countPerClick;
+        document.getElementById('clickCount').textContent = click;
+        document.getElementById('perClick').textContent = "Click Gain: " + countPerClick;
         document.getElementById('totalClick').textContent = "Total gained : " + totalGained;
+        trueclick = click; // Set trueclick to the loaded click count
         updateButtons(); // Update buttons display
-
-        // -------------> nb
-        // -------------> trueclick
     }
 }
+
 
 // Function to clear game data and reset the game
 function clearGameData() {
@@ -239,6 +240,8 @@ function clearGameData() {
     buttonCosts = [15, 500, 1500, 10, 30000, 100000, 1000, 5000, 10000, 50000, 100000, 300000];
     bonusCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     trueclick = 0
+    nb = 0.00;
+
     // Update display
     document.getElementById('clickCount').textContent = clickCount;
     document.getElementById('perClick').textContent = "Gain de click : " + countPerClick;
