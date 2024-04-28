@@ -97,59 +97,33 @@ function buy(costIndex) {
         clickCount = currentClickCount; // Updating click count
         // Adding bonus click count based on cost
 
-        // Facilities
-
-        if (cost === buttonCosts[0])
-            countPerClick += 3
-        else if (cost === buttonCosts[1])
-            countPerClick += 15;
-        else if (cost === buttonCosts[2])
-            countPerClick += 150;
-        else if (cost === buttonCosts[3]) {
-            nb += 0.05;
-            countPerClick += 0;
-        }
-        else if (cost === buttonCosts[4]) {
-            nb += 0.5;
-            countPerClick += 0;
-        }
-        else if (cost === buttonCosts[5]) {
-            nb += 5;
-            countPerClick += 0;
-        }
 
         // Upgrade
 
-        else if (cost === buttonCosts[6]) {
+        if (cost === buttonCosts[6]) {
             multiplication_list[0] *= 2;
-            countPerClick += 0;
         }
 
         else if (cost === buttonCosts[7]) {
             multiplication_list[1] *= 2;
-            countPerClick += 0;
         }    
         
         else if (cost === buttonCosts[8]) {
             multiplication_list[2] *= 2;
-            countPerClick += 0;
         }  
 
         else if (cost === buttonCosts[9]) {
             multiplication_list[3] *= 5;
-            multiplication += 5;
-            countPerClick += 0;
         }   
         
         else if (cost === buttonCosts[10]) {
             multiplication_list[4] *= 5;
-            countPerClick += 0;
         }
 
         else if (cost === buttonCosts[11]) {
             multiplication_list[5] *= 5;
-            countPerClick += 0;
         }
+        bonusCount[costIndex] = bonusCount[costIndex] + 1;// Number of time bonus has been purshased
 
         countPerClick = multiplication_list[0] * bonusCount [0] + multiplication_list[1] * bonusCount [1] + multiplication_list[2] * bonusCount [2] + 1; 
 
@@ -160,19 +134,18 @@ function buy(costIndex) {
         document.getElementById('perClick').textContent = "Click Gain : " + countPerClick;
 
         // Increasing cost for next purchase
-        buttonCosts[costIndex] = Math.floor(buttonCosts[costIndex] *= 1.33);
+        buttonCosts[costIndex] = Math.floor(buttonCosts[costIndex] *= 1.66);
         // Updating purchase buttons
-        bonusCount[costIndex] = bonusCount[costIndex] + 1;// Number of time bonus has been purshased
         updateButtons();
 
     }
 }
 
 function AutomaticCount() {
-    trueclick += nb
+    trueclick += multiplication_list[3] * bonusCount [3] + multiplication_list[4] * bonusCount [4] + multiplication_list[5] * bonusCount [5]; 
     currentClickCount = Math.floor(trueclick);
     document.getElementById('clickCount').textContent = currentClickCount;
-    totalGained += nb
+    totalGained += multiplication_list[3] * bonusCount [3] + multiplication_list[4] * bonusCount [4] + multiplication_list[5] * bonusCount [5];
     document.getElementById('totalClick').textContent = "Total gained : " + Math.floor(totalGained);
 
 }
@@ -210,14 +183,14 @@ function updateButtons() {
                 button.innerHTML = `
                     <p class="FU-title"> ${buttonName} </p>
                     <p>${cost} Clicks</p>
-                    <p>(Clicks + ${(cost === buttonCosts[0]) ? 3 : (cost === buttonCosts[1]) ? 15 : 150})</p>`}
+                    <p>(Clicks + ${(cost === buttonCosts[0]) ? multiplication_list[0] : (cost === buttonCosts[1]) ? multiplication_list[1] : multiplication_list[2]})</p>`}
 
             else if (i <6){
                 button.innerHTML = `
                 <p class="FU-title"> ${buttonName}</p>
                 <p>${cost} Clicks</p>
 
-                <p>(Auto clicks + ${(cost === buttonCosts[3]) ? 0.1 : (cost === buttonCosts[4]) ? 1 : 10}/s) </p>
+                <p>(Auto clicks + ${(cost === buttonCosts[3]) ? multiplication_list[3] * 2: (cost === buttonCosts[4]) ? multiplication_list[4] * 2: multiplication_list[5] * 2}/s) </p>
                 ` 
              }
                 else if (i <9){
@@ -231,7 +204,7 @@ function updateButtons() {
                     button.innerHTML = `
                     <p class="FU-title"> ${buttonName}</p>
                     <p>${cost} Clicks</p>
-                    <p>(${(cost === buttonCosts[9]) ?  `${facilitiesName[3]} x 2 ` : (cost === buttonCosts[10]) ?  `${facilitiesName[4]} x 2 ` :  `${facilitiesName[5]} x 2 `} )</p>`
+                    <p>(${(cost === buttonCosts[9]) ?  `${facilitiesName[3]} x 5 ` : (cost === buttonCosts[10]) ?  `${facilitiesName[4]} x 5 ` :  `${facilitiesName[5]} x 5 `} )</p>`
                     
 
                 };
