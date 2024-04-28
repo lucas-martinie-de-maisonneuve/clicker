@@ -4,7 +4,7 @@ let clickCount = 0; // Number of clicks on the button
 var nb = 0.00;
 let totalGained = 0; // Total clicks gained
 let trueclick = 0
-let countPerClick = 0
+let countPerClick = 1
 
 let buttonCosts = [15, 500, 1500, 20, 30000, 100000, 1000, 5000, 10000, 50000, 100000, 300000]; // Costs of purchase buttons
 let facilitiesName = ["Spacecraft SCV-70", "Satellite DeltaIV", "Rocket Atlas XXIII", "Space shuttle Lazlo-vl", "Queen Madec-28", "HLV Venture G X II", "Shooting Star", "Comet", "Moon", "Planet-251HLV f", "Black hole", "Mount Olympus"]
