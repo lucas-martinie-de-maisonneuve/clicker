@@ -7,7 +7,6 @@ let trueclick = 0;
 let countPerClick = 1;
 let multiplication_list = [3, 15, 150, 0.05, 0.5, 5]
 
-
 let buttonCosts = [15, 150, 1500, 15000, 30000, 100000, 1000, 5000, 10000, 50000, 100000, 300000]; // Costs of purchase buttons
 let initial_buttonCosts = [15, 150, 1500, 15000, 30000, 100000, 1000, 5000, 10000, 50000, 100000, 300000]; // Costs of purchase buttons
 let facilitiesName = ["Spacecraft SCV-70", "Satellite DeltaIV", "Rocket Atlas XXIII", "Space shuttle Lazlo-vl", "Queen Madec-28", "HLVenture G X II", "Shooting Star", "Comet", "Moon", "Planet-251HLV f", "Black hole", "Mount Olympus"]
@@ -22,9 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Load saved data if available
     loadGameData();
 
-    // Planet rotation
-    var rotation = 0;
-
     // Planet size
     let planet_width = 0;
     let planet_height = 0;
@@ -32,8 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Init purchase buttons
     updateButtons();
-    // setInterval(AutomaticCount, 1000);
-
 
     // Event listener for clicking the button
     clickButton.addEventListener('click', function () {
@@ -74,15 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     setInterval(saveGameData, 1000);
-
-    // Function for planet rotation
-    function rotatePlanet() {
-        rotation += 0.5;
-        clickButton.style.transform = 'translate(-50%, -50%) rotate(' + rotation + 'deg)';
-        window.requestAnimationFrame(rotatePlanet);
-    }
-
-
 });
 setInterval(saveGameData, 1000)
 
@@ -90,13 +75,11 @@ setInterval(saveGameData, 1000)
 function buy(costIndex) {
     let cost = buttonCosts[costIndex]; // Cost of the bonus
     let currentClickCount = parseInt(document.getElementById('clickCount').textContent);
-     // Current click count
+    // Current click count
     if (currentClickCount >= cost) { // Checking if user has enough clicks
         currentClickCount -= cost; // Subtracting cost from current clicks
         trueclick -= cost
         clickCount = currentClickCount; // Updating click count
-        // Adding bonus click count based on cost
-
 
         // Upgrade
 
@@ -106,16 +89,16 @@ function buy(costIndex) {
 
         else if (cost === buttonCosts[7]) {
             multiplication_list[1] *= 2;
-        }    
-        
+        }
+
         else if (cost === buttonCosts[8]) {
             multiplication_list[2] *= 2;
-        }  
+        }
 
         else if (cost === buttonCosts[9]) {
             multiplication_list[3] *= 5;
-        }   
-        
+        }
+
         else if (cost === buttonCosts[10]) {
             multiplication_list[4] *= 5;
         }
@@ -125,9 +108,7 @@ function buy(costIndex) {
         }
         bonusCount[costIndex] = bonusCount[costIndex] + 1;// Number of time bonus has been purshased
 
-        countPerClick = multiplication_list[0] * bonusCount [0] + multiplication_list[1] * bonusCount [1] + multiplication_list[2] * bonusCount [2] + 1; 
-
-
+        countPerClick = multiplication_list[0] * bonusCount[0] + multiplication_list[1] * bonusCount[1] + multiplication_list[2] * bonusCount[2] + 1;
 
         // Updating display
         document.getElementById('clickCount').textContent = currentClickCount;
@@ -142,10 +123,10 @@ function buy(costIndex) {
 }
 
 function AutomaticCount() {
-    trueclick += multiplication_list[3] * bonusCount [3] + multiplication_list[4] * bonusCount [4] + multiplication_list[5] * bonusCount [5]; 
+    trueclick += multiplication_list[3] * bonusCount[3] + multiplication_list[4] * bonusCount[4] + multiplication_list[5] * bonusCount[5];
     currentClickCount = Math.floor(trueclick);
     document.getElementById('clickCount').textContent = currentClickCount;
-    totalGained += multiplication_list[3] * bonusCount [3] + multiplication_list[4] * bonusCount [4] + multiplication_list[5] * bonusCount [5];
+    totalGained += multiplication_list[3] * bonusCount[3] + multiplication_list[4] * bonusCount[4] + multiplication_list[5] * bonusCount[5];
     document.getElementById('totalClick').textContent = "Total gained : " + Math.floor(totalGained);
 
 }
@@ -183,50 +164,53 @@ function updateButtons() {
                 button.innerHTML = `
                     <p class="FU-title"> ${buttonName} </p>
                     <p>${cost} Clicks</p>
-                    <p>(Clicks + ${(cost === buttonCosts[0]) ? multiplication_list[0] : (cost === buttonCosts[1]) ? multiplication_list[1] : multiplication_list[2]})</p>`}
+                    <p>(Clicks + ${(cost === buttonCosts[0]) ? multiplication_list[0] : (cost === buttonCosts[1]) ? multiplication_list[1] : multiplication_list[2]})</p>`
+            }
 
-            else if (i <6){
+            else if (i < 6) {
                 button.innerHTML = `
                 <p class="FU-title"> ${buttonName}</p>
                 <p>${cost} Clicks</p>
 
-                <p>(Auto clicks + ${(cost === buttonCosts[3]) ? multiplication_list[3] * 2: (cost === buttonCosts[4]) ? multiplication_list[4] * 2: multiplication_list[5] * 2}/s) </p>
-                ` 
-             }
-                else if (i <9){
+                <p>(Auto clicks + ${(cost === buttonCosts[3]) ? multiplication_list[3] * 2 : (cost === buttonCosts[4]) ? multiplication_list[4] * 2 : multiplication_list[5] * 2}/s) </p>
+                `
+            }
+            else if (i < 9) {
 
-                    button.innerHTML = `
+                button.innerHTML = `
                     <p class="FU-title"> ${buttonName}</p>
                     <p>${cost} Clicks</p>
-                    <p>(${(cost === buttonCosts[6]) ?  `${facilitiesName[0]} x 2 ` : (cost === buttonCosts[7]) ?  `${facilitiesName[1]} x 2 ` :  `${facilitiesName[2]} x 2 `} )</p>`
-                }
-                else {
-                    button.innerHTML = `
+                    <p>(${(cost === buttonCosts[6]) ? `${facilitiesName[0]} x 2 ` : (cost === buttonCosts[7]) ? `${facilitiesName[1]} x 2 ` : `${facilitiesName[2]} x 2 `} )</p>`
+            }
+            else {
+                button.innerHTML = `
                     <p class="FU-title"> ${buttonName}</p>
                     <p>${cost} Clicks</p>
-                    <p>(${(cost === buttonCosts[9]) ?  `${facilitiesName[3]} x 5 ` : (cost === buttonCosts[10]) ?  `${facilitiesName[4]} x 5 ` :  `${facilitiesName[5]} x 5 `} )</p>`
-                    
+                    <p>(${(cost === buttonCosts[9]) ? `${facilitiesName[3]} x 5 ` : (cost === buttonCosts[10]) ? `${facilitiesName[4]} x 5 ` : `${facilitiesName[5]} x 5 `} )</p>`
 
-                };
 
-        nbClicked.textContent = count;
-        // Assigning purchase function to button click event
-        div_button.onclick = function () {
-            buy(i);
-        };
+            };
 
-        div_button.appendChild(nbClicked); // Adding paragraph to facilities section
-        div_button.appendChild(button); // Adding button to facilities section
-        div_button.appendChild(img_button); // Adding logo to facilities section
+            nbClicked.textContent = count;
+            // Assigning purchase function to button click event
+            div_button.onclick = function () {
+                buy(i);
+            };
 
-            if (i < 6 ) {
+            div_button.appendChild(nbClicked); // Adding paragraph to facilities section
+            div_button.appendChild(button); // Adding button to facilities section
+            div_button.appendChild(img_button); // Adding logo to facilities section
+
+            if (i < 6) {
                 facilitiesSection.appendChild(div_button)
             } else {
                 // nbClicked.textContent = count;
                 upgradeSection.appendChild(div_button)
             }
 
-}}};
+        }
+    }
+};
 
 function saveGameData() {
     localStorage.clear()
@@ -236,6 +220,7 @@ function saveGameData() {
     localStorage.setItem('nb', nb); // Save auto-click parameters
     localStorage.setItem('buttonCosts', JSON.stringify(buttonCosts)); // Save button costs
     localStorage.setItem('bonusCount', JSON.stringify(bonusCount)); // Save bonus count
+    localStorage.setItem('multiplication_list', JSON.stringify(multiplication_list)); // Save bonus count
 }
 function loadGameData() {
     if (localStorage.getItem('clickCount') !== null) {
@@ -245,6 +230,7 @@ function loadGameData() {
         nb = parseFloat(localStorage.getItem('nb')); // Load auto-click parameters
         buttonCosts = JSON.parse(localStorage.getItem('buttonCosts')); // Load button costs
         bonusCount = JSON.parse(localStorage.getItem('bonusCount')); // Load bonus count
+        multiplication_list = JSON.parse(localStorage.getItem('multiplication_list')); // Load bonus count
         // Update display with loaded data
         document.getElementById('clickCount').textContent = click;
         document.getElementById('perClick').textContent = "Click Gain: " + countPerClick;
@@ -252,8 +238,6 @@ function loadGameData() {
         trueclick = click; // Set trueclick to the loaded click count
         updateButtons(); // Update buttons display
 
-        // -------------> nb
-        // -------------> trueclick
     }
 }
 
@@ -266,12 +250,14 @@ function clearGameData() {
     totalGained = 0;
     buttonCosts = [15, 150, 1500, 15000, 30000, 100000, 1000, 5000, 10000, 50000, 100000, 300000];
     bonusCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    multiplication_list = [3, 15, 150, 0.05, 0.5, 5]
+
     trueclick = 0
     nb = 0.00;
 
     // Update display
     document.getElementById('clickCount').textContent = clickCount;
-    document.getElementById('perClick').textContent = "Gain de click : " + countPerClick;
+    document.getElementById('perClick').textContent = "Click Gain : " + countPerClick;
     document.getElementById('totalClick').textContent = "Total gained : " + totalGained;
 
     // Update buttons
